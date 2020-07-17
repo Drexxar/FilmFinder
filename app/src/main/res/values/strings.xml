@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Найти фильм</string>
+    <string name="card_view_title">Название фильма</string>
+</resources>
