@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_id"
     android:layout_width="150dp"
     android:layout_height="215dp"
     android:layout_margin="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp">
 
@@ -12,21 +16,22 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/film_image_id"
             android:layout_width="match_parent"
             android:layout_height="170dp"
+            android:background="@color/cardview_dark_background"
             android:scaleType="centerCrop"
-            android:background="@color/cardview_dark_background"/>
+            android:contentDescription="@string/content_description" />
 
         <TextView
             android:id="@+id/film_title_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="#2C2828"
-            android:textSize="14sp"
             android:gravity="center"
-            android:text="@string/card_view_title"/>
+            android:text="@string/card_view_title"
+            android:textColor="#2C2828"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
