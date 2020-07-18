@@ -3,4 +3,13 @@
     <string name="card_view_title">Название фильма</string>
     <string name="description">Описание фильма</string>
     <string name ="content_description">Фильм</string>
+    <string name="home">Главная</string>
+    <string name="top_rated">Наиболее популярные</string>
+    <string name="favorite">Любимые</string>
+    <string name="communicate">Коммуникация</string>
+    <string name="share">Поделиться</string>
+    <string name="info">О приложении</string>
+    <string name="navigation">Навигация</string>
+    <string name="navigation_drawer_open">Открыть навигационную панель</string>
+    <string name="navigation_drawer_close">Закрыть навигационную панель</string>
 </resources>
