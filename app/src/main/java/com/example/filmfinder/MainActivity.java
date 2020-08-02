@@ -6,20 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 
-import com.example.filmfinder.adapter.RecyclerViewAdapter;
-import com.example.filmfinder.model.Film;
+import com.example.filmfinder.model.fragments.FavoriteFragment;
+import com.example.filmfinder.model.fragments.HomeFragment;
+import com.example.filmfinder.model.fragments.InfoFragment;
+import com.example.filmfinder.model.fragments.PopularFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -37,21 +34,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
     }
 
-        //Кнопки у drawer'a
+    //Кнопки у drawer'a
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item){
-        switch(item.getItemId()){
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HomeFragment()).commit();
@@ -65,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new FavoriteFragment()).commit();
                 break;
             case R.id.nav_share:
-                Toast.makeText(this, "Делимся",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Делимся", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_info:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -77,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         //Закрываем drawer кнопкой Назад, если он открыт
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
