@@ -13,8 +13,7 @@ public class Film {
     private String posterPath;
     @SerializedName("overview")
     private  String overview;
-    @SerializedName("release_date")
-    private int releaseDate;
+
     @SerializedName("genre_ids")
     private List<Integer> genreIds;
     @SerializedName("id")
@@ -28,12 +27,11 @@ public class Film {
     @SerializedName("vote_average")
     private Double voteAverage;
 
-    public Film(boolean adult, String posterPath, String overview, int releaseDate, List<Integer> genreIds,
+    public Film(boolean adult, String posterPath, String overview, List<Integer> genreIds,
                 Integer id, String originalTitle, String title, boolean video, Double voteAverage) {
         this.adult = adult;
         this.posterPath = posterPath;
         this.overview = overview;
-        this.releaseDate = releaseDate;
         this.genreIds = genreIds;
         this.id = id;
         OriginalTitle = originalTitle;
@@ -42,7 +40,7 @@ public class Film {
         this.voteAverage = voteAverage;
     }
 
-    String baseImageUrl ="https://image.tmdb.org/t/p/w500";
+
 
     public boolean isAdult() {
         return adult;
@@ -53,7 +51,7 @@ public class Film {
     }
 
     public String getPosterPath() {
-        return baseImageUrl.concat(posterPath);
+        return "https://image.tmdb.org/t/p/w500"+posterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -66,14 +64,6 @@ public class Film {
 
     public void setOverview(String overview) {
         this.overview = overview;
-    }
-
-    public int getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(int releaseDate) {
-        this.releaseDate = releaseDate;
     }
 
     public List<Integer> getGenreIds() {

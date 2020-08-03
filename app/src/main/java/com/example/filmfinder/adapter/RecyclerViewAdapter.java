@@ -47,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .load(mData.get(position).getPosterPath())
                 .fit()
                 .centerCrop()
-                .placeholder(R.drawable.ic_launcher_foreground);
+                .into(holder.ivFilmThumbnail);
 
         holder.cardView.setOnClickListener(new View.OnClickListener(){
             @Override
