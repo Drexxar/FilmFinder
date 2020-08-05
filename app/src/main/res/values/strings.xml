@@ -12,4 +12,6 @@
     <string name="navigation">Навигация</string>
     <string name="navigation_drawer_open">Открыть навигационную панель</string>
     <string name="navigation_drawer_close">Закрыть навигационную панель</string>
+    <string name="app_info">Разработчик: Сергей Глушков.</string>
+    <string name="app_contacts">E-mail: Drexar003@gmail.com</string>
 </resources>

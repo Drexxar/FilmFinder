@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,8 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
+    private int page = 1;
+    private int limit = 10;
     private String API_KEY = "71dd7f88c9be5e56f400fa680f1ead0a";
     @Nullable
     @Override
@@ -36,16 +39,11 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         final RecyclerView recyclerView = getView().findViewById(R.id.recyclerview_id);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-
         Service apiService = FilmApp.getInstance().service;
-        Call<FilmResponse> call = apiService.getTopRatedFilms(API_KEY, "ru");
-
-
-
+        Call<FilmResponse> call = apiService.getTopRatedFilms(API_KEY, "ru", 1);
         call.enqueue(new Callback<FilmResponse>() {
             @Override
             public void onResponse(Call<FilmResponse> call,Response<FilmResponse> response) {
@@ -55,7 +53,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<FilmResponse> call, Throwable t) {
-                Log.e("Home Fragment ",t.toString());
+                    Log.e("Home Fragment ", t.toString());
             }
         });
     }
