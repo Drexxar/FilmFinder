@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmfinder.R;
@@ -27,6 +28,7 @@ import retrofit2.Response;
 
 public class PopularFragment extends Fragment {
 
+    private int page = 1;
     private String API_KEY = "71dd7f88c9be5e56f400fa680f1ead0a";
     @Nullable
     @Override
@@ -39,15 +41,41 @@ public class PopularFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final RecyclerView recyclerView = getView().findViewById(R.id.recyclerview_id);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        final LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         Service apiService = FilmApp.getInstance().service;
-        Call<FilmResponse> call = apiService.getPopularFilms(API_KEY, "ru",1);
+        Call<FilmResponse> call = apiService.getPopularFilms(API_KEY, "ru",page);
         call.enqueue(new Callback<FilmResponse>() {
             @Override
             public void onResponse(Call<FilmResponse> call, Response<FilmResponse> response) {
                 List<Film> films = response.body().getResults();
                 recyclerView.setAdapter(new RecyclerViewAdapter(getContext(), films));
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+                    //Добавляем реализацию слушателя скролла.
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == 19) {
+
+                            //Прибавляем страницу при нахождении последнего элемента на предыдущей странице
+                            Call <FilmResponse> call = apiService.getPopularFilms(API_KEY,"ru", page+=1);
+                            //Заводим новый call
+                            call.enqueue(new Callback<FilmResponse>() {
+                                @Override
+                                public void onResponse(Call<FilmResponse> call, Response<FilmResponse> response) {
+                                    films.addAll(response.body().getResults());
+                                    recyclerView.getAdapter().notifyItemRangeInserted(films.size(),20);
+                                }
+
+                                @Override
+                                public void onFailure(Call<FilmResponse> call, Throwable t) {
+
+                                }
+                            });
+                        }
+                    }
+                });
             }
 
             @Override
