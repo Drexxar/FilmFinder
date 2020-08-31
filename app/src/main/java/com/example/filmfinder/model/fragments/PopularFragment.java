@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmfinder.R;
-import com.example.filmfinder.adapter.RecyclerViewAdapter;
+import com.example.filmfinder.adapter.FilmAdapter;
 import com.example.filmfinder.model.Film;
 import com.example.filmfinder.network.FilmApp;
 import com.example.filmfinder.network.FilmResponse;
@@ -50,7 +50,7 @@ public class PopularFragment extends Fragment {
             @Override
             public void onResponse(Call<FilmResponse> call, Response<FilmResponse> response) {
                 List<Film> films = response.body().getResults();
-                recyclerView.setAdapter(new RecyclerViewAdapter(getContext(), films));
+                recyclerView.setAdapter(new FilmAdapter(getContext(), films));
                 recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
                     //Добавляем реализацию слушателя скролла.

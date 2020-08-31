@@ -1,12 +1,10 @@
 package com.example.filmfinder.model.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmfinder.R;
-import com.example.filmfinder.adapter.RecyclerViewAdapter;
+import com.example.filmfinder.adapter.FilmAdapter;
 import com.example.filmfinder.model.Film;
 import com.example.filmfinder.network.FilmApp;
 import com.example.filmfinder.network.FilmResponse;
@@ -27,7 +25,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
 
 public class HomeFragment extends Fragment {
 
@@ -55,7 +52,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<FilmResponse> call, Response<FilmResponse> response) {
                 List<Film> films = response.body().getResults();
-                recyclerView.setAdapter(new RecyclerViewAdapter(getContext(), films));
+                recyclerView.setAdapter(new FilmAdapter(getContext(), films));
                 recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
                     //Добавляем реализацию слушателя скролла.
@@ -75,7 +72,7 @@ public class HomeFragment extends Fragment {
 
                                 @Override
                                 public void onFailure(Call<FilmResponse> call, Throwable t) {
-
+                                    Log.e("Scroll Failure", t.toString());
                                 }
                             });
                         }

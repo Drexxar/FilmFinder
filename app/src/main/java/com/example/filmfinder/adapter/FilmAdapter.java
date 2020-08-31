@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.filmfinder.R;
 import com.example.filmfinder.model.Film;
 import com.example.filmfinder.model.FilmActivity;
@@ -20,12 +19,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<Film> mData;
 
-    public RecyclerViewAdapter(Context mContext, List<Film> mData){
+    public FilmAdapter(Context mContext, List<Film> mData){
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -58,7 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("Title", mData.get(position).getTitle());
                 intent.putExtra("Description", mData.get(position).getOverview());
                 intent.putExtra("Thumbnail", mData.get(position).getPosterPath());
-
+                intent.putExtra("Id", mData.get(position).getId());
                 mContext.startActivity(intent);
             }
         });
