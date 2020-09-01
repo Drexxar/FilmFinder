@@ -16,4 +16,5 @@
     <string name="app_contacts">E-mail: Drexar003@gmail.com</string>
     <string name="add_to_favorite">Добавить фильм в избранное: </string>
     <string name="trailer">Трейлер: </string>
+    <string name="toggle_button_background"> </string>
 </resources>

@@ -30,10 +30,11 @@ public class PopularFragment extends Fragment {
 
     private int page = 1;
     private String API_KEY = "71dd7f88c9be5e56f400fa680f1ead0a";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_popular, container,false);
+        return inflater.inflate(R.layout.fragment_popular, container, false);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class PopularFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         Service apiService = FilmApp.getInstance().service;
-        Call<FilmResponse> call = apiService.getPopularFilms(API_KEY, "ru",page);
+        Call<FilmResponse> call = apiService.getPopularFilms(API_KEY, "ru", page);
         call.enqueue(new Callback<FilmResponse>() {
             @Override
             public void onResponse(Call<FilmResponse> call, Response<FilmResponse> response) {
@@ -59,13 +60,13 @@ public class PopularFragment extends Fragment {
                         if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == 19) {
 
                             //Прибавляем страницу при нахождении последнего элемента на предыдущей странице
-                            Call <FilmResponse> call = apiService.getPopularFilms(API_KEY,"ru", page+=1);
+                            Call<FilmResponse> call = apiService.getPopularFilms(API_KEY, "ru", page += 1);
                             //Заводим новый call
                             call.enqueue(new Callback<FilmResponse>() {
                                 @Override
                                 public void onResponse(Call<FilmResponse> call, Response<FilmResponse> response) {
                                     films.addAll(response.body().getResults());
-                                    recyclerView.getAdapter().notifyItemRangeInserted(films.size(),20);
+                                    recyclerView.getAdapter().notifyItemRangeInserted(films.size(), 20);
                                 }
 
                                 @Override
@@ -80,7 +81,7 @@ public class PopularFragment extends Fragment {
 
             @Override
             public void onFailure(Call<FilmResponse> call, Throwable t) {
-                Log.e("Popular Fragment ",t.toString());
+                Log.e("Popular Fragment ", t.toString());
             }
         });
     }

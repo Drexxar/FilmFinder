@@ -41,6 +41,9 @@ public class Film {
     }
 
 
+    public Film(){
+
+    }
 
     public boolean isAdult() {
         return adult;

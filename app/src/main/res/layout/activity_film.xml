@@ -68,7 +68,6 @@
                 android:id="@+id/trailer_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/trailer" />
@@ -88,10 +87,12 @@
                     android:text="@string/add_to_favorite"
                     android:textSize="18sp" />
 
-                <Button
+                <ToggleButton
                     android:id="@+id/favorite_button"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:textOn="@string/toggle_button_background"
+                    android:textOff="@string/toggle_button_background"
                     android:background="@drawable/heart_button" />
             </LinearLayout>
 
